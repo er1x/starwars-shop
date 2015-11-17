@@ -21,3 +21,6 @@ insecure                # Allow all DB writes from clients (for prototyping)
 iron:router
 zimme:active-route
 stylus
+ian:accounts-ui-bootstrap-3
+accounts-password
+accounts-github
