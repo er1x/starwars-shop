@@ -1,0 +1,27 @@
+<template name="cart">
+<div class="container products">
+  <h1>Carrito</h1>
+  <hr>
+  <h2>Items en el carrito: {{numItems}}</h2>
+  <div class="row category-credit" style="margin-top:20px">
+    <div class="col-md-6">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Item ID</th>
+            <th>Cantidad</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each items}}
+            <tr>
+              <td>{{relationId}}</td>
+              <td>{{quantity}}</td>
+            </tr>
+          {{/each}}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+</template>
