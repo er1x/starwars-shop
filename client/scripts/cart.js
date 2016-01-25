@@ -1,5 +1,6 @@
 Template.cart.helpers({
   items: function(){
+    console.log(Cart.items());
     return Cart.items();
   },
   numItems: function(){

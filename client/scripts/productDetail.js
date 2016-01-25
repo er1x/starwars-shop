@@ -5,5 +5,6 @@ Template.productDetail.events({
       relationId: template.data._id._str,
       quantity: 1
     });
+    toastr.success(null, 'Item añadido');
   }
 });
