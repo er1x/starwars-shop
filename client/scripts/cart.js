@@ -8,7 +8,6 @@ Template.cart.helpers({
         amount: item.quantity
       });
     });
-    console.log(items);
     return items;
   },
   numItems: function(){
@@ -25,15 +24,31 @@ Template.cart.helpers({
 });
 
 Template.cart.events({
-  "click #pay": function(event, template){
-    alert('pagando!');
+  "submit .form-horizontal": function(event, template){
+    event.preventDefault();
+    Stripe.card.createToken({
+      number: $('#ccnum').val(),
+      cvc: $('#cvc').val(),
+      exp_month: $('#exp-month').val(),
+      exp_year: $('#exp-year').val()
+    }, function(status, response) {
+        if (status !== 200) {
+          toastr.error(null, response.message);
+          return;
+        }
+        stripeToken = response.id;
+        Meteor.call('chargeCard',
+                    stripeToken,
+                    Cart.items().fetch() ,
+                    Meteor.userId(),
+                  function(err, result) {
+                    if (err) {
+                      toastr.error(null, err);
+                    } else {
+                      toastr.success(null, 'Compra realizada!');
+                      Cart.empty();
+                    }
+                  });
+    });
   }
 });
-
-
-/*
-_id: "hwmxBQdzSYmHShLFb"
-quantity: 1
-relationId: "569019022a1195022eb52132"
-relationType: "Products"
-*/

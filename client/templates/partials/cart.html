@@ -1,40 +1,69 @@
 <template name="cart">
-<div class="container products">
-  <h1>Carrito</h1>
-  <hr>
-  <h2>Items en el carrito: {{numItems}}</h2>
-  <div class="row category-credit" style="margin-top:20px">
-    <div class="col-md-6">
-      <table class="table table-striped">
-        <thead>
-          <tr>
-            <th>Item ID</th>
-            <th>Cantidad</th>
-          </tr>
-        </thead>
-        <tbody>
-          {{#each items}}
-            <tr>
-              <td data-id="{{_id}}">{{item.title}}</td>
-              <td>{{amount}}</td>
-            </tr>
-          {{/each}}
-        </tbody>
-      </table>
+  <div class="container products">
+    <h1>Carrito</h1>
+    <hr>
+    <div class="col-md-4">
+      <h2>Items en el carrito: {{numItems}}</h2>
+      <div class="row category-credit" style="margin-top:20px">
+        <div class="col-md-12">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>Item ID</th>
+                <th>Cantidad</th>
+              </tr>
+            </thead>
+            <tbody>
+              {{#each items}}
+              <tr>
+                <td data-id="{{_id}}">{{item.title}}</td>
+                <td>{{amount}}</td>
+              </tr>
+              {{/each}}
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <p>Total a pagar: <strong id="totalPrice">{{totalPrice}}</strong>€</p>
+      <br>
+      <br>
+    </div>
+    <div class="col-md-6 col-lg-6">
+      <form class="form-horizontal well">
+        <fieldset>
+          <legend>Datos del pago</legend>
+          <div class="form-group">
+            <label class="col-lg-2 control-label">Número de tarjeta</label>
+            <div class="col-lg-10">
+              <input type="text" class="form-control" id="ccnum" placeholder="número..." required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-lg-2 control-label">Fecha expiración</label>
+            <div class="col-lg-4">
+              <input type="text" class="form-control" id="exp-year" placeholder="Año" required>
+            </div>
+            <div class="col-lg-4">
+              <input type="text" class="form-control" id="exp-month" placeholder="Mes" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-lg-2 control-label">CVC</label>
+            <div class="col-lg-10">
+              <input type="text" class="form-control" id="cvc" placeholder="Email" required>
+            </div>
+          </div>
+          {{#if currentUser}}
+          <div class="form-group">
+            <button id="pay" class="btn btn-primary" type="submit">
+              <i class="glyphicon glyphicon-shopping-cart"></i> Pagar
+            </button>
+          </div>
+          {{else}}
+          <p>No puedes pagar sin estar registrado: ¡monstruo desaprensivo!</p>
+          {{/if}}
+        </fieldset>
+      </form>
     </div>
   </div>
-  <p>Total a pagar: <strong>{{totalPrice}}€</strong></p>
-  {{#if currentUser}}
-    <div>
-      <button id="pay" class="btn btn-primary">
-        <i class="glyphicon glyphicon-shopping-cart"></i>
-        Pagar
-      </button>
-    </div>
-  {{else}}
-    <p>No puedes pagar sin estar registrado: ¡monstruo desaprensivo!</p>
-  {{/if}}
-  <br>
-  <br>
-</div>
 </template>

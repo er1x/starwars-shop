@@ -1,0 +1,8 @@
+{
+  "public": {
+    "stripe_pk": "pk_test_superclavefantastica"
+  },
+  "private": {
+    "stripe_sk": "sk_test_furiousthemonkeyboy"
+  }
+}
